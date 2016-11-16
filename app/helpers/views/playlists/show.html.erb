@@ -1,0 +1,40 @@
+<h1 style="color: white"><%= @user.username %></h1>
+
+<h3 style="color: white">My Playlist</h3>
+<div class="container">
+
+<% songs = [] %>
+<% @songs.each do |song| %>
+  <% songs << song.song_uri.gsub("spotify:track:","") %>
+<% end %>
+<% songs = songs.join(",") %>
+
+<iframe src="https://embed.spotify.com/?uri=spotify:trackset:ChrisFinlayson:<%=songs%>"  width="300" height="380"frameborder="0" allowtransparency="true"></iframe>
+  <table class="table search_results">
+    <% @songs.each do |song| %>
+    <tr>
+      <td>
+        <h4><%= song.song_name %></h4>
+        added by: <%= song.added_by %>
+      </td>
+      <td>
+         <%= link_to 'delete', song, :method => :delete, :class => "btn btn-lg btn-success"%>
+      </td>
+    </tr>
+      <% end %>
+  </table>
+</div>
+
+<h2>Friends</h2>
+  <table style="color: white" class="table">
+    <% @user.all_friends.each do |friend| %>
+     <% if friend.id != @params_id %>
+      <tr>
+        <td>
+        <%= link_to friend.username, "/playlists/#{friend.permalink}"  %>
+        </td>
+      </tr>
+      <% end %>
+    <% end %>
+  </table>
+<%= link_to "Search for friends", users_path %>
