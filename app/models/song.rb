@@ -5,3 +5,4 @@ class Song < ActiveRecord::Base
   validates :song_name, uniqueness: { scope: :user_id,
   message: "song already on playlist!" }
 end
+

@@ -3,8 +3,9 @@ Rails.application.routes.draw do
   get 'search' => 'pages#search'
   get 'search_results' => 'pages#search_results'
   resources :songs
-  #devise_for :users
-  #root 'pages#search'
+  devise_for :users
+  resources :users
+  root 'pages#search'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

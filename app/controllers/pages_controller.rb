@@ -20,6 +20,8 @@ class PagesController < ApplicationController
 
     start = (@page - 1) * 5
 
+    # logger.info "params is => " + params[:search]
+
     @search_query = escaped_search
     @results = search_spotify(@search_query)["tracks"]["items"][start..start + 4]
     render('search_results')
